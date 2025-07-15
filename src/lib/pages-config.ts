@@ -7,4 +7,5 @@ export const publicPages = {
 
 export const privatePages = {
   profile: "/profile",
+  admin: "/admin",
 };

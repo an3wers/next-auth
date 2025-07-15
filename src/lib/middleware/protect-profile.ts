@@ -3,12 +3,12 @@
 import { type NextRequest, NextResponse } from "next/server";
 import { getTokens } from "../session";
 
-export async function protectLogin(request: NextRequest) {
+export async function protectProfile(request: NextRequest) {
   const tokens = await getTokens(request);
 
   if (!tokens) {
-    return NextResponse.next();
+    return NextResponse.redirect(new URL("/auth/login", request.url));
   }
 
-  return NextResponse.redirect(new URL("/", request.url));
+  return NextResponse.next();
 }

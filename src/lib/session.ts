@@ -43,6 +43,7 @@ export async function getTokens(request: NextRequest) {
         await userApi().refreshSession(refreshToken);
       accessToken = newAccessToken;
       refreshToken = newRefreshToken;
+      await setSession({ accessToken, refreshToken });
     } catch {
       request.cookies.delete("accessToken");
       request.cookies.delete("refreshToken");
