@@ -28,5 +28,18 @@ export function userApi() {
     return data
   }
 
-  return { login };
+  async function refreshSession(refreshToken: string): Promise<{accessToken: string, refreshToken: string}> {
+    const res = await fetch(`${API_URL}/auth/refresh`, {
+      method: 'POST',
+      body: JSON.stringify({ refreshToken }),
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    })
+
+    const { data } = await res.json()
+    return data
+  }
+
+  return { login, refreshSession };
 }
